@@ -160,12 +160,7 @@ void Test_wxFrame::refrescar_list_tokens(){
         wxMessageBox(error,"Error fatal");
         return;
     }
-    /*const unsigned int lista = this->list_tokens->GetCount() - 1;
-    if(lista >= 0){
-        for(unsigned int i = 0; i < lista; i++){
-            this->list_tokens->Delete(0);
-        }
-    }*/
+    this->list_tokens->Clear();
 
     if(tokens.get_tamano() > 0){
         for(unsigned int i = 0; i < tokens.get_tamano(); i++){
