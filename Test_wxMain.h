@@ -41,6 +41,7 @@ class Test_wxFrame: public wxFrame
         void OnQuit(wxCommandEvent& event);
         void OnAbout(wxCommandEvent& event);
         void OnbtnAnadirClick(wxCommandEvent& event);
+        void txt_codigo_TextChanged(wxCommandEvent& event);
         //*)
 
         //(*Identifiers(Test_wxFrame)

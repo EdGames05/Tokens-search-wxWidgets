@@ -1,6 +1,11 @@
 #ifndef FUNCIONES_H
 #define FUNCIONES_H
 
+#include <string>
+#include "AList.h"
+
+
+using namespace std;
 
 class Funciones
 {
@@ -8,6 +13,7 @@ class Funciones
         Funciones();
         virtual ~Funciones();
         char* concatenar_char(const char* cadena, const char* concatenar);
+        AList<string> separar(string texto, string separador);
     protected:
 
     private:

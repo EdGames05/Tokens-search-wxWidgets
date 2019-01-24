@@ -17,6 +17,7 @@ class Palabras
         string get_message_error();
         AList<string> getListaTokens();
         bool insertar_token(const char* token);
+        AList<string> listar_tokensEncontrados(string texto, AList<string> tokens);
     protected:
 
     private:
@@ -26,10 +27,6 @@ class Palabras
         char* msgError = "";
         bool error = false;
         AList<string> listaTokens;
-
-        //----------- Funciones privadas
-        static int _callback(void* datos,int argc, char** argv, char** colName);
-        //------------------------------
 };
 
 #endif // PALABRAS_H

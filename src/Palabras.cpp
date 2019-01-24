@@ -34,7 +34,7 @@ Palabras::Palabras()
 
 Palabras::~Palabras()
 {
-    //dtor
+    this->listaTokens.borrar_todosElementos();
 }
 
 bool Palabras::get_message_error(string &msgError){
@@ -100,5 +100,29 @@ bool Palabras::insertar_token(const char* token){
             return true;
         }
         free(&strquery);
+    }
+}
+
+AList<string> Palabras::listar_tokensEncontrados(string texto,AList<string> tokens){
+    AList<string> _palabras = func->separar(texto," ");
+    AList<string> encontrados;
+
+    if(_palabras.get_tamano() == 0){
+        return encontrados;
+    }
+    unsigned int contador = 0;
+    string pala = "";
+    for(unsigned int i = 0; i < _palabras.get_tamano(); i++){
+        contador = 0;
+        pala = "";
+        for(unsigned int j = 0; j < tokens.get_tamano(); j++){
+            if(tokens.obtener_at(j) == _palabras.obtener_at(i)){
+                contador++;
+            }
+        }
+
+        if(contador > 0){
+            encontrados.insertar(_palabras.obtener_at(i) + " - " + std::to_string(contador));
+        }
     }
 }

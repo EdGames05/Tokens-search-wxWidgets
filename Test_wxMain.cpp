@@ -77,7 +77,7 @@ Test_wxFrame::Test_wxFrame(wxWindow* parent,wxWindowID id)
     wxMenuItem* MenuItem2;
 
     Create(parent, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, _T("wxID_ANY"));
-    SetClientSize(wxSize(929,314));
+    SetClientSize(wxSize(929,329));
     Panel1 = new wxPanel(this, ID_PANEL1, wxPoint(0,136), wxSize(572,183), wxTAB_TRAVERSAL, _T("ID_PANEL1"));
     Panel2 = new wxPanel(Panel1, ID_PANEL2, wxPoint(8,8), wxSize(200,304), wxTAB_TRAVERSAL, _T("ID_PANEL2"));
     txtToken = new wxTextCtrl(Panel2, ID_TEXTCTRL1, wxEmptyString, wxPoint(8,272), wxSize(144,21), 0, wxDefaultValidator, _T("ID_TEXTCTRL1"));
@@ -108,6 +108,7 @@ Test_wxFrame::Test_wxFrame(wxWindow* parent,wxWindowID id)
     Connect(ID_BUTTON1,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&Test_wxFrame::OnbtnAnadirClick);
     Connect(idMenuQuit,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&Test_wxFrame::OnQuit);
     Connect(idMenuAbout,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&Test_wxFrame::OnAbout);
+    Connect(ID_TEXTCTRL2,wxEVT_COMMAND_TEXT_UPDATED,(wxObjectEventFunction)&Test_wxFrame::txt_codigo_TextChanged);
     //*)
 
     this->token = new Palabras();
@@ -167,4 +168,22 @@ void Test_wxFrame::refrescar_list_tokens(){
             this->list_tokens->AppendAndEnsureVisible(wxString(tokens.obtener_at(i)));
         }
     }
+}
+
+void Test_wxFrame::txt_codigo_TextChanged(wxCommandEvent& event){
+    AList<string> lista_tokens;
+
+    for(unsigned int i = 0; i < this->list_tokens->GetCount(); i++){
+        string pala = std::string(this->list_tokens->GetString(i).mb_str());
+        lista_tokens.insertar(pala);
+    }
+
+    const char* pala = this->txt_codigo->GetValue();
+    wxMessageBox(wxString(pala),"Algo");
+    /*AList<string> listar_encontrados = this->token->listar_tokensEncontrados(pala,lista_tokens);
+
+    for(unsigned int i = 0; i < listar_encontrados.get_tamano(); i++){
+        this->list_tokens_econtrados->AppendAndEnsureVisible(listar_encontrados.obtener_at(i));
+        wxMessageBox(_(listar_encontrados.obtener_at(i)),_("Mensaje"));
+    }*/
 }
