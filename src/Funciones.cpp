@@ -1,3 +1,5 @@
+/*--------------------- Ed Company ---------------------*/
+
 #include "Funciones.h"
 #include <stdlib.h>
 #include <cstring>
@@ -34,11 +36,12 @@ AList<string> Funciones::separar(string texto, string separador){
     else{
         string pala = "";
         for(unsigned int i = 0; i < texto.size(); i++){
-            if((texto[i] != separador[0])&& (texto[i] != '\n'){
+            if((texto[i] != separador[0])&& (texto[i] != '\n')){
                 pala += texto[i];
             }
             else{
                 lista.insertar(pala);
+                pala = "";
             }
 
             if((i == texto.size() - 1) && (pala != "")){

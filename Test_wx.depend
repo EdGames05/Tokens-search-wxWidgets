@@ -1504,7 +1504,7 @@
 1544395208 c:\wxwidgets-3.1.2\include\wx\univ\theme.h
 	"wx/string.h"
 
-1548172806 c:\librerias desarrollo\test_wx\test_wxmain.h
+1548361962 c:\librerias desarrollo\test_wx\test_wxmain.h
 	<wx/button.h>
 	<wx/frame.h>
 	<wx/listbox.h>
@@ -1592,7 +1592,7 @@
 
 1544395208 c:\wxwidgets-3.1.2\include\wx\qt\menu.h
 
-1548351024 source:c:\librerias desarrollo\test_wx\test_wxmain.cpp
+1548362005 source:c:\librerias desarrollo\test_wx\test_wxmain.cpp
 	"Test_wxMain.h"
 	<wx/msgdlg.h>
 	"Palabras.h"
@@ -1884,11 +1884,11 @@
 	<unicode/utf16.h>
 	<math.h>
 
-1548190617 c:\librerias desarrollo\test_wx\include\palabras.h
+1548361380 c:\librerias desarrollo\test_wx\include\palabras.h
 	<string>
 	"AList.h"
 
-1548275083 source:c:\librerias desarrollo\test_wx\src\palabras.cpp
+1548361910 source:c:\librerias desarrollo\test_wx\src\palabras.cpp
 	"Palabras.h"
 	"../sqlite/sqlite3.h"
 	"AList.h"
@@ -1900,7 +1900,7 @@
 1543671506 c:\librerias desarrollo\test_wx\sqlite\sqlite3.h
 	<stdarg.h>
 
-1548352536 source:c:\librerias desarrollo\test_wx\src\funciones.cpp
+1548355423 source:c:\librerias desarrollo\test_wx\src\funciones.cpp
 	"Funciones.h"
 	<stdlib.h>
 	<cstring>
@@ -1908,7 +1908,7 @@
 	<memory>
 	"AList.h"
 
-1548189956 c:\librerias desarrollo\test_wx\include\funciones.h
+1548355438 c:\librerias desarrollo\test_wx\include\funciones.h
 	<string>
 	"AList.h"
 

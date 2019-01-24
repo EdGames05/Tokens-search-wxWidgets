@@ -1,3 +1,5 @@
+/*--------------------- Ed Company ---------------------*/
+
 #ifndef PALABRAS_H
 #define PALABRAS_H
 
@@ -18,6 +20,7 @@ class Palabras
         AList<string> getListaTokens();
         bool insertar_token(const char* token);
         AList<string> listar_tokensEncontrados(string texto, AList<string> tokens);
+        bool eliminar_token(const char* token);
     protected:
 
     private:

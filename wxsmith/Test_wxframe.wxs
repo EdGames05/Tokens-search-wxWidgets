@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <wxsmith>
 	<object class="wxFrame" name="Test_wxFrame">
-		<size>929,329</size>
+		<size>929,353</size>
 		<id_arg>0</id_arg>
 		<object class="wxPanel" name="ID_PANEL1" variable="Panel1" member="yes">
 			<pos>0,136</pos>
-			<size>572,183</size>
+			<size>929,336</size>
 			<object class="wxPanel" name="ID_PANEL2" variable="Panel2" member="yes">
 				<pos>8,8</pos>
 				<size>200,304</size>
@@ -24,6 +24,11 @@
 					<pos>8,32</pos>
 					<size>180,232</size>
 				</object>
+				<object class="wxButton" name="ID_BUTTON2" variable="btn_borrarSeleccion" member="yes">
+					<label>Borrar selección</label>
+					<pos>8,0</pos>
+					<handler function="Onbtn_borrarSeleccionClick" entry="EVT_BUTTON" />
+				</object>
 			</object>
 			<object class="wxPanel" name="ID_PANEL3" variable="Panel3" member="yes">
 				<pos>216,8</pos>
@@ -37,6 +42,7 @@
 					<pos>8,32</pos>
 					<size>504,264</size>
 					<style>wxTE_MULTILINE</style>
+					<handler function="txt_codigo_TextChanged" entry="EVT_TEXT" />
 				</object>
 				<object class="wxStaticText" name="ID_STATICTEXT1" variable="StaticText1" member="yes">
 					<label>Tokens encontrados</label>

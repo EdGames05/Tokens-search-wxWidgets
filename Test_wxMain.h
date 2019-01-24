@@ -6,7 +6,7 @@
  * Copyright: Allam ()
  * License:
  **************************************************************/
-
+/*--------------------- Ed Company ---------------------*/
 #ifndef TEST_WXMAIN_H
 #define TEST_WXMAIN_H
 
@@ -35,6 +35,7 @@ class Test_wxFrame: public wxFrame
 
         //------------------------- Funciones agregadas -----------------------------//
         void refrescar_list_tokens();
+        void refrescar_list_tokens_encontrados();
         //---------------------------------------------------------------------------//
 
         //(*Handlers(Test_wxFrame)
@@ -42,12 +43,14 @@ class Test_wxFrame: public wxFrame
         void OnAbout(wxCommandEvent& event);
         void OnbtnAnadirClick(wxCommandEvent& event);
         void txt_codigo_TextChanged(wxCommandEvent& event);
+        void Onbtn_borrarSeleccionClick(wxCommandEvent& event);
         //*)
 
         //(*Identifiers(Test_wxFrame)
         static const long ID_TEXTCTRL1;
         static const long ID_BUTTON1;
         static const long ID_LISTBOX2;
+        static const long ID_BUTTON2;
         static const long ID_PANEL2;
         static const long ID_LISTBOX1;
         static const long ID_TEXTCTRL2;
@@ -62,6 +65,7 @@ class Test_wxFrame: public wxFrame
 
         //(*Declarations(Test_wxFrame)
         wxButton* btnAnadir;
+        wxButton* btn_borrarSeleccion;
         wxListBox* list_tokens;
         wxListBox* list_tokens_econtrados;
         wxPanel* Panel1;
@@ -74,6 +78,7 @@ class Test_wxFrame: public wxFrame
         wxTextCtrl* txt_codigo;
         //*)
         DECLARE_EVENT_TABLE()
+
 };
 
 #endif // TEST_WXMAIN_H

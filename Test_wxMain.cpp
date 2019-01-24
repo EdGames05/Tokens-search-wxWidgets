@@ -6,7 +6,7 @@
  * Copyright: Allam ()
  * License:
  **************************************************************/
-
+/*--------------------- Ed Company ---------------------*/
 #include "Test_wxMain.h"
 #include <wx/msgdlg.h>
 #include "Palabras.h"
@@ -50,6 +50,7 @@ wxString wxbuildinfo(wxbuildinfoformat format)
 const long Test_wxFrame::ID_TEXTCTRL1 = wxNewId();
 const long Test_wxFrame::ID_BUTTON1 = wxNewId();
 const long Test_wxFrame::ID_LISTBOX2 = wxNewId();
+const long Test_wxFrame::ID_BUTTON2 = wxNewId();
 const long Test_wxFrame::ID_PANEL2 = wxNewId();
 const long Test_wxFrame::ID_LISTBOX1 = wxNewId();
 const long Test_wxFrame::ID_TEXTCTRL2 = wxNewId();
@@ -77,12 +78,13 @@ Test_wxFrame::Test_wxFrame(wxWindow* parent,wxWindowID id)
     wxMenuItem* MenuItem2;
 
     Create(parent, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, _T("wxID_ANY"));
-    SetClientSize(wxSize(929,329));
-    Panel1 = new wxPanel(this, ID_PANEL1, wxPoint(0,136), wxSize(572,183), wxTAB_TRAVERSAL, _T("ID_PANEL1"));
+    SetClientSize(wxSize(929,353));
+    Panel1 = new wxPanel(this, ID_PANEL1, wxPoint(0,136), wxSize(929,336), wxTAB_TRAVERSAL, _T("ID_PANEL1"));
     Panel2 = new wxPanel(Panel1, ID_PANEL2, wxPoint(8,8), wxSize(200,304), wxTAB_TRAVERSAL, _T("ID_PANEL2"));
     txtToken = new wxTextCtrl(Panel2, ID_TEXTCTRL1, wxEmptyString, wxPoint(8,272), wxSize(144,21), 0, wxDefaultValidator, _T("ID_TEXTCTRL1"));
     btnAnadir = new wxButton(Panel2, ID_BUTTON1, _("Add"), wxPoint(160,272), wxSize(32,23), 0, wxDefaultValidator, _T("ID_BUTTON1"));
     list_tokens = new wxListBox(Panel2, ID_LISTBOX2, wxPoint(8,32), wxSize(180,232), 0, 0, 0, wxDefaultValidator, _T("ID_LISTBOX2"));
+    btn_borrarSeleccion = new wxButton(Panel2, ID_BUTTON2, _("Borrar selección"), wxPoint(8,0), wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON2"));
     Panel3 = new wxPanel(Panel1, ID_PANEL3, wxPoint(216,8), wxSize(704,304), wxTAB_TRAVERSAL, _T("ID_PANEL3"));
     list_tokens_econtrados = new wxListBox(Panel3, ID_LISTBOX1, wxPoint(520,32), wxSize(176,264), 0, 0, 0, wxDefaultValidator, _T("ID_LISTBOX1"));
     txt_codigo = new wxTextCtrl(Panel3, ID_TEXTCTRL2, wxEmptyString, wxPoint(8,32), wxSize(504,264), wxTE_MULTILINE, wxDefaultValidator, _T("ID_TEXTCTRL2"));
@@ -106,6 +108,7 @@ Test_wxFrame::Test_wxFrame(wxWindow* parent,wxWindowID id)
     SetStatusBar(StatusBar1);
 
     Connect(ID_BUTTON1,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&Test_wxFrame::OnbtnAnadirClick);
+    Connect(ID_BUTTON2,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&Test_wxFrame::Onbtn_borrarSeleccionClick);
     Connect(ID_TEXTCTRL2,wxEVT_COMMAND_TEXT_UPDATED,(wxObjectEventFunction)&Test_wxFrame::txt_codigo_TextChanged);
     Connect(idMenuQuit,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&Test_wxFrame::OnQuit);
     Connect(idMenuAbout,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&Test_wxFrame::OnAbout);
@@ -134,8 +137,7 @@ void Test_wxFrame::OnQuit(wxCommandEvent& event)
 
 void Test_wxFrame::OnAbout(wxCommandEvent& event)
 {
-    wxString msg = wxbuildinfo(long_f);
-    wxMessageBox(msg, _("Welcome to..."));
+    wxMessageBox(_("edcompany5@gmail.com"), _("Ed Company"));
 }
 
 void Test_wxFrame::OnbtnAnadirClick(wxCommandEvent& event)
@@ -170,19 +172,44 @@ void Test_wxFrame::refrescar_list_tokens(){
     }
 }
 
-void Test_wxFrame::txt_codigo_TextChanged(wxCommandEvent& event){
+void Test_wxFrame::refrescar_list_tokens_encontrados(){
     AList<string> lista_tokens;
 
     for(unsigned int i = 0; i < this->list_tokens->GetCount(); i++){
         string pala = std::string(this->list_tokens->GetString(i).mb_str());
         lista_tokens.insertar(pala);
     }
-
+    this->list_tokens_econtrados->Clear();
     const wxString pala = this->txt_codigo->GetValue();
 
     AList<string> listar_encontrados = this->token->listar_tokensEncontrados(std::string(pala.mb_str()),lista_tokens);
 
+    if(listar_encontrados.get_tamano() == 0){
+        return;
+    }
+
     for(unsigned int i = 0; i < listar_encontrados.get_tamano(); i++){
         this->list_tokens_econtrados->AppendAndEnsureVisible(wxString(listar_encontrados.obtener_at(i).c_str()));
+    }
+}
+void Test_wxFrame::txt_codigo_TextChanged(wxCommandEvent& event){
+    this->refrescar_list_tokens_encontrados();
+}
+
+void Test_wxFrame::Onbtn_borrarSeleccionClick(wxCommandEvent& event)
+{
+    const unsigned int sele = this->list_tokens->GetSelection();
+    if(!this->list_tokens->IsSelected(sele)){
+        wxMessageBox(_("Seleccione un token para eliminarlo"),_("Borrar token"));
+    }
+    else{
+        if(!token->eliminar_token(this->list_tokens->GetString(sele))){
+            wxMessageBox(_("Error al eliminar token"),_("Error"));
+        }
+        else{
+            wxMessageBox(_("Token eliminado exitosamente"),_("Exito"));
+            this->refrescar_list_tokens();
+            this->refrescar_list_tokens_encontrados();
+        }
     }
 }

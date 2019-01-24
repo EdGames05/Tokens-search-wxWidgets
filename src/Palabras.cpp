@@ -1,3 +1,5 @@
+/*--------------------- Ed Company ---------------------*/
+
 #include "Palabras.h"
 #include "../sqlite/sqlite3.h"
 #include "AList.h"
@@ -122,7 +124,56 @@ AList<string> Palabras::listar_tokensEncontrados(string texto,AList<string> toke
         }
 
         if(contador > 0){
-            encontrados.insertar(_palabras.obtener_at(i) + " - " + std::to_string(contador));
+            encontrados.insertar(_palabras.obtener_at(i));
         }
+    }
+    AList<string> listaFinal;
+    //------------------ Busca cuantos encontro ----------------
+    for(unsigned int i = 0; i < tokens.get_tamano(); i++){
+        contador = 0;
+        for(unsigned int j = 0; j < encontrados.get_tamano(); j++){
+            if(tokens[i] == encontrados[j]){
+                contador++;
+            }
+        }
+
+        if(contador > 0){
+            listaFinal.insertar(tokens[i] + " - " + std::to_string(contador));
+        }
+    }
+    //----------------------------------------------------------
+    return listaFinal;
+
+}
+
+bool Palabras::eliminar_token(const char* token){
+    if(sqlite3_open(this->nom_db,&this->db) != SQLITE_OK){
+        this->msgError = "Error al abrir base de datos...";
+        this->error = true;
+        return false;
+    }
+    else{
+        //----------------------- Concatenar tres cadenas -------------------------------------//
+        char* strquery = "DELETE FROM bot_tokens where token = '";
+        const char* fin = "'";
+        char *query = (char *) malloc(1 + strlen(strquery) + strlen(fin) + strlen(token));
+        strcpy(query,strquery);
+        strcat(query,token);
+        strcat(query,fin);
+        //------------------------------------------------------------------------------------//
+        if(sqlite3_exec(db, query,0,0,&this->msgError) != SQLITE_OK){
+            this->error = true;
+            sqlite3_close(db);
+            free(&strquery);
+            return false;
+        }
+        else{
+            sqlite3_close(db);
+            this->error = false;
+            this->msgError = "";
+            free(&strquery);
+            return true;
+        }
+        free(&strquery);
     }
 }
