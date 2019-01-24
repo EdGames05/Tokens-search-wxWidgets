@@ -1592,7 +1592,7 @@
 
 1544395208 c:\wxwidgets-3.1.2\include\wx\qt\menu.h
 
-1548277617 source:c:\librerias desarrollo\test_wx\test_wxmain.cpp
+1548351024 source:c:\librerias desarrollo\test_wx\test_wxmain.cpp
 	"Test_wxMain.h"
 	<wx/msgdlg.h>
 	"Palabras.h"
@@ -1900,14 +1900,13 @@
 1543671506 c:\librerias desarrollo\test_wx\sqlite\sqlite3.h
 	<stdarg.h>
 
-1548275090 source:c:\librerias desarrollo\test_wx\src\funciones.cpp
+1548352536 source:c:\librerias desarrollo\test_wx\src\funciones.cpp
 	"Funciones.h"
 	<stdlib.h>
 	<cstring>
 	<string>
 	<memory>
 	"AList.h"
-	<wx/msgdlg.h>
 
 1548189956 c:\librerias desarrollo\test_wx\include\funciones.h
 	<string>
@@ -1942,7 +1941,7 @@
 
 1544395208 c:\wxwidgets-3.1.2\include\wx\qt\stattext.h
 
-1548185074 c:\librerias desarrollo\test_wx\include\alist.h
+1548351950 c:\librerias desarrollo\test_wx\include\alist.h
 
 1544395208 c:\wxwidgets-3.1.2\include\wx\listctrl.h
 	"wx/defs.h"

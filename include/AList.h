@@ -33,6 +33,7 @@ public:
     //*************************************************************************//
     //**************************** Operadores *********************************//
     AList<T> operator=(AList<T> lista);
+    T operator[](const unsigned int indice);
     //*************************************************************************//
     //*************************************************************************//
 };
@@ -120,6 +121,7 @@ T AList<T>::obtener_at(unsigned int pos){
 template <class T>
 void AList<T>::borrar_at(unsigned int pos){
     this->borrar_at_private(this->lista,pos);
+    this->tamano = 0;
 }
 
 template <class T>
@@ -143,7 +145,7 @@ void AList<T>::borrar_at_private(Nodo *&lista, unsigned int pos){
                     }
 
                     delete(p);
-                    this->tamano--;
+                    this->tamano = this->tamano - 1;
                     return;
                 }
                 ant = p;
@@ -191,6 +193,32 @@ AList<T> AList<T>::operator=(const AList<T> lista){
     else{
         this->borrar_todosElementos();
         return this;
+    }
+}
+
+template<class T>
+T AList<T>::operator[](const unsigned int indice){
+    T objeto_nulo;
+
+    if(indice > this->tamano){
+        return objeto_nulo;
+    }
+    else
+    if(this->lista == NULL){
+        return objeto_nulo;
+    }
+    else{
+        Nodo *aux = this->lista;
+        unsigned int i = 0;
+        while(aux != NULL){
+            if(i == indice){
+                return aux->objeto;
+            }
+            i++;
+            aux = aux->sig;
+        }
+
+        return objeto_nulo;
     }
 }
 

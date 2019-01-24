@@ -106,9 +106,9 @@ Test_wxFrame::Test_wxFrame(wxWindow* parent,wxWindowID id)
     SetStatusBar(StatusBar1);
 
     Connect(ID_BUTTON1,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&Test_wxFrame::OnbtnAnadirClick);
+    Connect(ID_TEXTCTRL2,wxEVT_COMMAND_TEXT_UPDATED,(wxObjectEventFunction)&Test_wxFrame::txt_codigo_TextChanged);
     Connect(idMenuQuit,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&Test_wxFrame::OnQuit);
     Connect(idMenuAbout,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&Test_wxFrame::OnAbout);
-    Connect(ID_TEXTCTRL2,wxEVT_COMMAND_TEXT_UPDATED,(wxObjectEventFunction)&Test_wxFrame::txt_codigo_TextChanged);
     //*)
 
     this->token = new Palabras();
@@ -178,12 +178,11 @@ void Test_wxFrame::txt_codigo_TextChanged(wxCommandEvent& event){
         lista_tokens.insertar(pala);
     }
 
-    const char* pala = this->txt_codigo->GetValue();
-    wxMessageBox(wxString(pala),"Algo");
-    /*AList<string> listar_encontrados = this->token->listar_tokensEncontrados(pala,lista_tokens);
+    const wxString pala = this->txt_codigo->GetValue();
+
+    AList<string> listar_encontrados = this->token->listar_tokensEncontrados(std::string(pala.mb_str()),lista_tokens);
 
     for(unsigned int i = 0; i < listar_encontrados.get_tamano(); i++){
-        this->list_tokens_econtrados->AppendAndEnsureVisible(listar_encontrados.obtener_at(i));
-        wxMessageBox(_(listar_encontrados.obtener_at(i)),_("Mensaje"));
-    }*/
+        this->list_tokens_econtrados->AppendAndEnsureVisible(wxString(listar_encontrados.obtener_at(i).c_str()));
+    }
 }

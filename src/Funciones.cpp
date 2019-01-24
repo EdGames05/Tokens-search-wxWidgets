@@ -34,13 +34,15 @@ AList<string> Funciones::separar(string texto, string separador){
     else{
         string pala = "";
         for(unsigned int i = 0; i < texto.size(); i++){
-            if(texto[i] != '\0' && texto[i] != '\n' && texto[i] != separador[0]){
+            if((texto[i] != separador[0])&& (texto[i] != '\n'){
                 pala += texto[i];
             }
-            else
-            if(texto[i] == separador[0]){
+            else{
                 lista.insertar(pala);
-                pala = "";
+            }
+
+            if((i == texto.size() - 1) && (pala != "")){
+                lista.insertar(pala);
             }
         }
         return lista;
